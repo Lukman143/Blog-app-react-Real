@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import Base from '../components/Base'
 import userContext from '../context/userContext'
 import { loadPost, updatePost as doUpdatePost } from '../services/post-service'
+import { updatePostImage } from "../services/post-service";
 import { loadAllCategories } from '../services/category-service'
 import { Card, CardBody, Form, Input, Label, Button, Container } from "reactstrap"
 import JoditEditor from "jodit-react"
@@ -23,6 +24,7 @@ const UpdateBlog = () => {
     const navigate = useNavigate()
     const [post, setPost] = useState(null)
 
+    const [image, setImage] = useState(null)
 
 
     useEffect(() => {
@@ -70,6 +72,14 @@ const UpdateBlog = () => {
     const updatePost = (event) => {
         event.preventDefault()
         console.log(post)
+
+        updatePostImage(image,post.postId).then(data=>{
+            // toast.success("Image Uploaded !!")
+         }).catch(error=>{
+             //toast.error("Error in uploading image")
+             console.log(error)
+         })
+
         doUpdatePost({ ...post, category: { categoryId: post.categoryId } }, post.postId)
             .then(res => {
                 console.log(res)
@@ -90,6 +100,17 @@ const UpdateBlog = () => {
           content: '',
           categoryId: 0, // Set it to the default category or any initial value
         });
+      };
+
+      const handleImageChange = (event) => {
+        // const selectedFile = event.target.files[0];
+        // setPost({
+        //   ...post,
+        //   // Assuming you have a property like "image" in your post state
+        //   image: selectedFile,
+        // });
+        console.log(event.target.files[0])
+        setImage(event.target.files[0])
       };
 
     const updateHtml = () => {
@@ -139,7 +160,7 @@ const UpdateBlog = () => {
 
                             <div className="mt-3">
                                 <Label for="image">Select Post banner</Label>
-                                <Input id="image" type="file" onChange={''} />
+                                <Input id="image" type="file" onChange={handleImageChange} />
                             </div>
 
 

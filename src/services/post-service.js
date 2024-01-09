@@ -49,6 +49,21 @@ export const uploadPostImage = (image, postId) => {
         .then((response) => response.data);
 };
 
+//update post banner image
+
+export const updatePostImage = (image, postId) => {
+    let formData = new FormData();
+    formData.append("image", image);
+    return privateAxios
+        .put("/update/image/" + postId, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        })
+        .then((response) => response.data);
+};
+
+
 //get cateory wise posts
 export function loadPostCategoryWise(categoryId) {
     return privateAxios
