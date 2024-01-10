@@ -15,9 +15,12 @@ const PostPage = () => {
 
     const [post, setPost] = useState(null)
 
+    const [currentUser, setCurrentUser] = useState(null)
+
 
     const [comment, setComment] = useState({
-        content: ''
+        content: '',
+        userName:''
     })
 
     useEffect(() => {
@@ -26,6 +29,24 @@ const PostPage = () => {
 
             console.log(data)
             setPost(data)
+
+            let dataK = localStorage.getItem("data");
+
+            // Parse the JSON string to convert it into a JavaScript object
+            let parsedData = JSON.parse(dataK);
+
+            // Access the "name" property
+            let userName = parsedData.user.name;
+
+            // Log the result
+            console.log("User Name:", userName);
+            if (userName != null)
+            {
+                setCurrentUser(userName)
+            }
+            
+
+
         }).catch((error) => {
             toast.error("error while fetching post from server")
         })
@@ -112,7 +133,7 @@ const PostPage = () => {
                             <Card className="mt-4 border-0" key={index}>
                                 <CardBody>
                                     <CardText>
-                                        {c.content}
+                                        <strong>{c.userName}</strong>: {c.content}
                                     </CardText>
                                 </CardBody>
                             </Card>
@@ -126,7 +147,7 @@ const PostPage = () => {
                                 type="textarea"
                                 placeholder="Enter comment here"
                                 value={comment.content}
-                                onChange={(event) => setComment({ content: event.target.value })}
+                                onChange={(event) => setComment({ content: event.target.value,userName:currentUser })}
                             />
 
                             <Button onClick={submitPost} className="mt-2" color="primary">Submit</Button>

@@ -7,6 +7,7 @@ import Post from './Post'
 import { toast } from 'react-toastify'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { deletePostService } from '../services/post-service'
+
 function NewFeed() {
 
 
@@ -92,7 +93,7 @@ function NewFeed() {
                     }
                 }>
 
-                    <h1 className='danger'>Blogs Count  ( {postContent?.totalElements} )</h1>
+                    <h1 >Blogs Count  ( {postContent?.totalElements} )</h1>
                     <InfiniteScroll
                         dataLength={postContent.content.length}
                         next={changePageInfinite}
