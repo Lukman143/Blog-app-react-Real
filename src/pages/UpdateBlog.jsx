@@ -103,12 +103,6 @@ const UpdateBlog = () => {
       };
 
       const handleImageChange = (event) => {
-        // const selectedFile = event.target.files[0];
-        // setPost({
-        //   ...post,
-        //   // Assuming you have a property like "image" in your post state
-        //   image: selectedFile,
-        // });
         console.log(event.target.files[0])
         setImage(event.target.files[0])
       };
