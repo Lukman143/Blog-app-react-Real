@@ -15,6 +15,8 @@ const Login = () => {
         username: '',
         password: ''
     })
+    const [error, setError] = useState(null);
+
 
     const userContxtData = useContext(userContext)
 
@@ -63,7 +65,12 @@ const Login = () => {
 
 
         }).catch(error => {
-            console.log(error)
+            console.log(error.response.data.message)
+
+            if ('Invalid username or password !!' === error.response.data.message) {
+                console.log(true);
+                setError(error);
+            }
 
             if (error?.response?.status == 404 || error?.response?.status == 400) {
                 toast.error(error.response.data.message)
@@ -108,6 +115,12 @@ const Login = () => {
                                             onChange={(e) => handleChange(e, 'password')} value={loginDetail.password}></Input>
                                     </FormGroup>
 
+                                    {/* Forgot Password link */}
+                                    {error?.response?.data?.message === 'Invalid username or password !!' && (
+                                        <FormGroup>
+                                            <p className="text-danger mb-0">Forgot your password? <a href="/forgot-password">Reset it here.</a></p>
+                                        </FormGroup>
+                                    )}
                                     {/* buttons */}
                                     <Container className="text-center">
                                         <Button color="info" outline>Submit</Button>

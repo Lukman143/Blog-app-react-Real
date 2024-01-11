@@ -40,6 +40,7 @@ const PostPage = () => {
 
             // Log the result
             console.log("User Name:", userName);
+            
             if (userName != null)
             {
                 setCurrentUser(userName)

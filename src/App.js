@@ -16,7 +16,7 @@ import UserProvider from "./context/UserProvider";
 import Categories from "./pages/Categories";
 import UpdateBlog from './pages/UpdateBlog';
 import ProfileInfo from './pages/user-routes/ProfileInfo';
-
+import ForgotPassword from './pages/ForgotPassword';
 function App() {
   return (
     <UserProvider>        
@@ -25,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
