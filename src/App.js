@@ -10,7 +10,6 @@ import UserDashboard from './pages/user-routes/UserDashboard';
 import PriavateRoute from './components/PrivateRoute';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import NewFeed from './components/NewFeed';
 import PostPage from './pages/PostPage';
 import UserProvider from "./context/UserProvider";
 import Categories from "./pages/Categories";
