@@ -1,4 +1,5 @@
 import { privateAxios, myAxios } from "./Helper";
+import axios from 'axios';
 
 export const createPost = (postData) => {
     console.log(postData)
@@ -85,3 +86,30 @@ export function updatePost(post, postId) {
     console.log(post);
     return privateAxios.put("/posts/" + postId, post).then((resp) => resp.data);
 }
+
+// reset password call
+
+
+export function resetPasswordRequest (email) {
+  const apiUrl = 'http://localhost:9191/api/v1/auth/reset-password/request';
+  
+  // Prepare the payload
+  const requestData = {
+    email: email
+  };
+
+  // Make the API request
+  return axios.post(apiUrl, requestData)
+    .then(response => {
+      // Handle the response here
+      console.log("Email data"+response.data);
+      return response.data;
+    })
+    .catch(error => {
+      // Handle errors here
+      console.error('Error making reset password request:', error);
+      throw error; // You might want to handle errors in your component
+    });
+};
+
+
